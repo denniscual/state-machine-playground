@@ -1,13 +1,46 @@
 // @flow
-import React, { useState, useCallback, useMemo, useReducer } from 'react'
+import React, {
+  useState,
+  useCallback,
+  useMemo,
+  useReducer,
+  useEffect,
+  useRef,
+} from 'react'
 import styled from 'styled-components'
 import { State, useTransition } from './state-machine'
-import type { ChildrenArray } from 'react'
+import type { ChildrenArray, Ref } from 'react'
 
 // ------------------------------------ //
 // Styles
 // ------------------------------------ //
-const SC = {}
+const SC = {
+  // Section
+  section: styled.section`
+    margin-bottom: 18em;
+    text-align: center;
+  `,
+  section__title: styled.h3`
+    font-size: 2rem;
+    text-transform: lowercase;
+  `,
+  // Transition button
+  transitionButton: styled.button`
+    background-color: #000;
+    padding: calc(0.5rem + 3px);
+    margin: 0 0.5rem;
+    text-transform: UPPERCASE;
+    font-size: 0.8rem;
+    font-weight: 700;
+    border: 3px solid #000000;
+    color: #fff;
+    &:hover {
+      background-color: #ffffff;
+      border: 3px solid #000000;
+      color: #000000;
+    }
+  `,
+}
 
 // ------------------------------------ //
 // Custom Hooks
@@ -51,6 +84,19 @@ function useInputProps(init: string): InputProps {
     }),
     [input],
   )
+}
+
+// Making the input focus once the Component is rendered.
+function useInputFocus() {
+  // Set maybe type for current because React will not assign the instance of the element or Component
+  // until the invocation of render method. React also assign null value to the ref after unmounting.
+  const inputEl: { current: ?HTMLInputElement } = useRef(null)
+  useEffect(() => {
+    if (inputEl.current) {
+      inputEl.current.focus()
+    }
+  }, [])
+  return inputEl
 }
 
 // ------------------------------------ //
@@ -125,11 +171,11 @@ function Section({
   children: ChildrenArray<any>,
 }) {
   return (
-    <section>
-      <h3>{title}</h3>
+    <SC.section>
+      <SC.section__title>{title}</SC.section__title>
       <p>{description}</p>
       {children}
-    </section>
+    </SC.section>
   )
 }
 
@@ -143,7 +189,7 @@ function GettingStarted({ onNext }: { onNext: () => void }) {
       title="Getting started"
       description="give us your details and we'll make an account for ya"
     >
-      <button onClick={onNext}>Getting started</button>
+      <SC.transitionButton onClick={onNext}>Get started</SC.transitionButton>
     </Section>
   )
 }
@@ -153,6 +199,7 @@ function Username({
   detailsDispatch,
   initValue,
 }: FieldProps) {
+  const inputEl = useInputFocus()
   const { value, onChange } = useInputProps(initValue)
   const handleNextButton = useCallback(() => {
     // state machine transition
@@ -163,9 +210,17 @@ function Username({
   return (
     <Section title="Username" description="pick your identifier">
       <div>
-        <input name="username" onChange={onChange} value={value} />
-        <button onClick={onBack}>Back</button>
-        <button onClick={handleNextButton}>Next</button>
+        <input
+          // $FlowFixMe - It throws an error `Cannot create 'input' element because in property ref. Either...
+          ref={inputEl}
+          name="username"
+          onChange={onChange}
+          value={value}
+        />
+        <SC.transitionButton onClick={onBack}>Back</SC.transitionButton>
+        <SC.transitionButton onClick={handleNextButton}>
+          Next
+        </SC.transitionButton>
       </div>
     </Section>
   )
@@ -176,6 +231,7 @@ function Password({
   detailsDispatch,
   initValue,
 }: FieldProps) {
+  const inputEl = useInputFocus()
   const { value, onChange } = useInputProps(initValue)
   const handleNextButton = useCallback(
     (event: SyntheticEvent<HTMLButtonElement>) => {
@@ -190,13 +246,17 @@ function Password({
     <Section title="Password" description="protect yourself! use a password">
       <div>
         <input
+          // $FlowFixMe - It throws an error `Cannot create 'input' element because in property ref. Either...
+          ref={inputEl}
           type="password"
           name="password"
           onChange={onChange}
           value={value}
         />
-        <button onClick={onBack}>Back</button>
-        <button onClick={handleNextButton}>Next</button>
+        <SC.transitionButton onClick={onBack}>Back</SC.transitionButton>
+        <SC.transitionButton onClick={handleNextButton}>
+          Next
+        </SC.transitionButton>
       </div>
     </Section>
   )
@@ -207,6 +267,7 @@ function Email({
   detailsDispatch,
   initValue,
 }: FieldProps) {
+  const inputEl = useInputFocus()
   const { value, onChange } = useInputProps(initValue)
   const handleNextButton = useCallback(
     (event: SyntheticEvent<HTMLButtonElement>) => {
@@ -223,9 +284,18 @@ function Email({
       description="how can we reach you via antiquated asynchronous messaging technology?"
     >
       <div>
-        <input type="email" name="email" onChange={onChange} value={value} />
-        <button onClick={onBack}>Back</button>
-        <button onClick={handleNextButton}>Next</button>
+        <input
+          // $FlowFixMe - It throws an error `Cannot create 'input' element because in property ref. Either...
+          ref={inputEl}
+          type="email"
+          name="email"
+          onChange={onChange}
+          value={value}
+        />
+        <SC.transitionButton onClick={onBack}>Back</SC.transitionButton>
+        <SC.transitionButton onClick={handleNextButton}>
+          Next
+        </SC.transitionButton>
       </div>
     </Section>
   )
@@ -241,8 +311,10 @@ function Summary({ navigation: { onBack, onNext }, details }: SummaryProps) {
       <div>
         <p>Username: {details.username}</p>
         <p>Email: {details.email}</p>
-        <button onClick={onBack}>Back to username</button>
-        <button onClick={onNext}>Next</button>
+        <SC.transitionButton onClick={onBack}>
+          Back to username
+        </SC.transitionButton>
+        <SC.transitionButton onClick={onNext}>Next</SC.transitionButton>
       </div>
     </Section>
   )
@@ -266,7 +338,9 @@ function End({
   )
   return (
     <Section title="Final" description="great experience huh!">
-      <button onClick={handleNextButton}>Start over</button>
+      <SC.transitionButton onClick={handleNextButton}>
+        Start over
+      </SC.transitionButton>
     </Section>
   )
 }

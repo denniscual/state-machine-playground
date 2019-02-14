@@ -71,9 +71,13 @@ const machine = Machine(statechart)
 const GlobalStyle = createGlobalStyle`
   /* Include the normalize css */
   ${normalizeCss}
+  * {
+    letter-spacing: 0.1em;
+  }
   body {
     height: 98vh;
     width: 100vw;
+    font-family: sans-serif
   }
   /* Styling the root element */
   #root {
