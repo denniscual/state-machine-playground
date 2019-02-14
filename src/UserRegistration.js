@@ -1,9 +1,17 @@
 // @flow
 import React, { useState, useCallback, useMemo, useReducer } from 'react'
+import styled from 'styled-components'
 import { State, useTransition } from './state-machine'
 import type { ChildrenArray } from 'react'
 
-// --------- Custom Hooks -------- //
+// ------------------------------------ //
+// Styles
+// ------------------------------------ //
+const SC = {}
+
+// ------------------------------------ //
+// Custom Hooks
+// ------------------------------------ //
 type NavigationHandlers = { onBack: () => void, onNext: () => void }
 function useNavigationHandlers(): NavigationHandlers {
   const transition = useTransition()
@@ -45,8 +53,9 @@ function useInputProps(init: string): InputProps {
   )
 }
 
-// --------- Business Logic -------- //
-
+// ------------------------------------ //
+// Business Logic
+// ------------------------------------ //
 type Dispatch<A> = A => void
 type RegistrationDetailsState = {
   username: string,
@@ -97,7 +106,9 @@ function reducerUserRegistrationDetails(
   }
 }
 
-// --------- Components -------- //
+// ------------------------------------ //
+// Components
+// ------------------------------------ //
 type FieldProps = {
   initValue: string,
   navigation: NavigationHandlers,

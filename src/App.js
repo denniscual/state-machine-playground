@@ -1,9 +1,14 @@
 // @flow
-import React, { Component } from 'react'
+import React from 'react'
 import { Machine } from 'xstate'
+import { createGlobalStyle } from 'styled-components'
 import StateMachineProvider from './state-machine'
 import UserRegistration from './UserRegistration'
+import normalizeCss from './normalize'
 
+// ------------------------------------ //
+// App state transition
+// ------------------------------------ //
 const statechart = {
   initial: 'init',
   states: {
@@ -46,10 +51,21 @@ const statechart = {
 
 const machine = Machine(statechart)
 
+// ------------------------------------ //
+// Global styles
+// ------------------------------------ //
+const GlobalStyle = createGlobalStyle`
+  /* Include the normalize css */
+  ${normalizeCss}
+`
+
 function App() {
   return (
     <StateMachineProvider value={machine}>
-      <UserRegistration />
+      <React.Fragment>
+        <GlobalStyle />
+        <UserRegistration />
+      </React.Fragment>
     </StateMachineProvider>
   )
 }
