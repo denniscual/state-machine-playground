@@ -9,7 +9,7 @@ import React, {
 } from 'react'
 import styled from 'styled-components'
 import { State, useTransition } from './state-machine'
-import type { ChildrenArray, Ref } from 'react'
+import type { ChildrenArray } from 'react'
 
 // ------------------------------------ //
 // Styles
@@ -34,11 +34,23 @@ const SC = {
     font-weight: 700;
     border: 3px solid #000000;
     color: #fff;
+    outline: 0;
+
     &:hover {
       background-color: #ffffff;
       border: 3px solid #000000;
       color: #000000;
     }
+  `,
+  // Input field
+  textInput: styled.input`
+    width: 250px;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: 0;
+    border-bottom: 3px solid #000;
+    text-align: center;
+    outline: 0;
   `,
 }
 
@@ -210,17 +222,19 @@ function Username({
   return (
     <Section title="Username" description="pick your identifier">
       <div>
-        <input
-          // $FlowFixMe - It throws an error `Cannot create 'input' element because in property ref. Either...
+        {/* $FlowFixMe */}
+        <SC.textInput
           ref={inputEl}
           name="username"
           onChange={onChange}
           value={value}
         />
-        <SC.transitionButton onClick={onBack}>Back</SC.transitionButton>
-        <SC.transitionButton onClick={handleNextButton}>
-          Next
-        </SC.transitionButton>
+        <div>
+          <SC.transitionButton onClick={onBack}>Back</SC.transitionButton>
+          <SC.transitionButton onClick={handleNextButton}>
+            Next
+          </SC.transitionButton>
+        </div>
       </div>
     </Section>
   )
@@ -245,18 +259,20 @@ function Password({
   return (
     <Section title="Password" description="protect yourself! use a password">
       <div>
-        <input
-          // $FlowFixMe - It throws an error `Cannot create 'input' element because in property ref. Either...
+        {/* $FlowFixMe */}
+        <SC.textInput
           ref={inputEl}
           type="password"
           name="password"
           onChange={onChange}
           value={value}
         />
-        <SC.transitionButton onClick={onBack}>Back</SC.transitionButton>
-        <SC.transitionButton onClick={handleNextButton}>
-          Next
-        </SC.transitionButton>
+        <div>
+          <SC.transitionButton onClick={onBack}>Back</SC.transitionButton>
+          <SC.transitionButton onClick={handleNextButton}>
+            Next
+          </SC.transitionButton>
+        </div>
       </div>
     </Section>
   )
@@ -281,21 +297,23 @@ function Email({
   return (
     <Section
       title="Email"
-      description="how can we reach you via antiquated asynchronous messaging technology?"
+      description="how can we reach you via messaging technology?"
     >
       <div>
-        <input
-          // $FlowFixMe - It throws an error `Cannot create 'input' element because in property ref. Either...
+        {/* $FlowFixMe */}
+        <SC.textInput
           ref={inputEl}
           type="email"
           name="email"
           onChange={onChange}
           value={value}
         />
-        <SC.transitionButton onClick={onBack}>Back</SC.transitionButton>
-        <SC.transitionButton onClick={handleNextButton}>
-          Next
-        </SC.transitionButton>
+        <div>
+          <SC.transitionButton onClick={onBack}>Back</SC.transitionButton>
+          <SC.transitionButton onClick={handleNextButton}>
+            Next
+          </SC.transitionButton>
+        </div>
       </div>
     </Section>
   )
