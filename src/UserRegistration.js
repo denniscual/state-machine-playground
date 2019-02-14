@@ -279,7 +279,7 @@ function UserRegistration() {
     initDetailsState,
   )
   return (
-    <div>
+    <React.Fragment>
       <State is="init">
         <GettingStarted onNext={navigation.onNext} />
       </State>
@@ -310,7 +310,7 @@ function UserRegistration() {
       <State is="end" detailsDispatch={detailsDispatch}>
         <End onNext={navigation.onNext} detailsDispatch={detailsDispatch} />
       </State>
-    </div>
+    </React.Fragment>
   )
 }
 
