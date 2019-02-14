@@ -89,8 +89,6 @@ function useInputProps(init: string): InputProps {
   // Input onChange handler
   function handleChangeInput(event: SyntheticEvent<HTMLInputElement>): void {
     // To access your input instance use `event.currentTarget`.
-    // eslint-disable-next-line no-unused-expressions
-    ;(event.currentTarget: HTMLInputElement)
     setInput(event.currentTarget.value)
   }
   return useMemo(
