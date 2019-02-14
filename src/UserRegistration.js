@@ -9,7 +9,7 @@ import React, {
 } from 'react'
 import styled from 'styled-components'
 import { State, useTransition } from './state-machine'
-import type { ChildrenArray } from 'react'
+import type { Node } from 'react'
 
 // ------------------------------------ //
 // Styles
@@ -51,6 +51,10 @@ const SC = {
     border-bottom: 3px solid #000;
     text-align: center;
     outline: 0;
+  `,
+  // List
+  list: styled.ul`
+    text-align: left;
   `,
 }
 
@@ -180,7 +184,7 @@ function Section({
 }: {
   title: string,
   description: string,
-  children: ChildrenArray<any>,
+  children: Node,
 }) {
   return (
     <SC.section>
@@ -221,20 +225,18 @@ function Username({
   }, [value])
   return (
     <Section title="Username" description="pick your identifier">
+      {/* $FlowFixMe */}
+      <SC.textInput
+        ref={inputEl}
+        name="username"
+        onChange={onChange}
+        value={value}
+      />
       <div>
-        {/* $FlowFixMe */}
-        <SC.textInput
-          ref={inputEl}
-          name="username"
-          onChange={onChange}
-          value={value}
-        />
-        <div>
-          <SC.transitionButton onClick={onBack}>Back</SC.transitionButton>
-          <SC.transitionButton onClick={handleNextButton}>
-            Next
-          </SC.transitionButton>
-        </div>
+        <SC.transitionButton onClick={onBack}>Back</SC.transitionButton>
+        <SC.transitionButton onClick={handleNextButton}>
+          Next
+        </SC.transitionButton>
       </div>
     </Section>
   )
@@ -258,21 +260,19 @@ function Password({
   )
   return (
     <Section title="Password" description="protect yourself! use a password">
+      {/* $FlowFixMe */}
+      <SC.textInput
+        ref={inputEl}
+        type="password"
+        name="password"
+        onChange={onChange}
+        value={value}
+      />
       <div>
-        {/* $FlowFixMe */}
-        <SC.textInput
-          ref={inputEl}
-          type="password"
-          name="password"
-          onChange={onChange}
-          value={value}
-        />
-        <div>
-          <SC.transitionButton onClick={onBack}>Back</SC.transitionButton>
-          <SC.transitionButton onClick={handleNextButton}>
-            Next
-          </SC.transitionButton>
-        </div>
+        <SC.transitionButton onClick={onBack}>Back</SC.transitionButton>
+        <SC.transitionButton onClick={handleNextButton}>
+          Next
+        </SC.transitionButton>
       </div>
     </Section>
   )
@@ -299,21 +299,19 @@ function Email({
       title="Email"
       description="how can we reach you via messaging technology?"
     >
+      {/* $FlowFixMe */}
+      <SC.textInput
+        ref={inputEl}
+        type="email"
+        name="email"
+        onChange={onChange}
+        value={value}
+      />
       <div>
-        {/* $FlowFixMe */}
-        <SC.textInput
-          ref={inputEl}
-          type="email"
-          name="email"
-          onChange={onChange}
-          value={value}
-        />
-        <div>
-          <SC.transitionButton onClick={onBack}>Back</SC.transitionButton>
-          <SC.transitionButton onClick={handleNextButton}>
-            Next
-          </SC.transitionButton>
-        </div>
+        <SC.transitionButton onClick={onBack}>Back</SC.transitionButton>
+        <SC.transitionButton onClick={handleNextButton}>
+          Next
+        </SC.transitionButton>
       </div>
     </Section>
   )
@@ -326,13 +324,14 @@ type SummaryProps = {
 function Summary({ navigation: { onBack, onNext }, details }: SummaryProps) {
   return (
     <Section title="Summary" description="here's what you entered:">
+      <SC.list>
+        <li>username: {details.username}</li>
+        <li>email: {details.email}</li>
+      </SC.list>
+      <p>does this look correct?</p>
       <div>
-        <p>Username: {details.username}</p>
-        <p>Email: {details.email}</p>
-        <SC.transitionButton onClick={onBack}>
-          Back to username
-        </SC.transitionButton>
-        <SC.transitionButton onClick={onNext}>Next</SC.transitionButton>
+        <SC.transitionButton onClick={onBack}>Nah; No!</SC.transitionButton>
+        <SC.transitionButton onClick={onNext}>Yes</SC.transitionButton>
       </div>
     </Section>
   )
