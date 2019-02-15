@@ -1,3 +1,4 @@
+// @flow
 import { createGlobalStyle } from 'styled-components'
 import initThemes from './theme'
 import normalizeCss from './normalize'
@@ -6,21 +7,26 @@ import normalizeCss from './normalize'
 // Theming
 // ------------------------------------ //
 const themeVars = {
-  mainBackgroundColor: '--main-bg-color',
-  mainTextColor: '--main-text-color',
-  mainButtonColor: '--main-button-color',
-  accentColor: '--accent-color',
+  backgroundColor: '--bg-color',
+  textColor: '--text-color',
+  buttonColor: '--button-color',
+  buttonTextColor: '--button-text-color',
+  borderColor: '--border-color',
 }
 
 const lightTheme = {
-  [themeVars.mainBackgroundColor]: '#ffffff',
-  [themeVars.mainTextColor]: '#000000',
-  [themeVars.mainButtonColor]: '#ffffff',
+  [themeVars.backgroundColor]: '#ffffff',
+  [themeVars.textColor]: '#000000',
+  [themeVars.buttonColor]: '#000000',
+  [themeVars.buttonTextColor]: '#ffffff',
+  [themeVars.borderColor]: '#000000',
 }
 const darkTheme = {
-  [themeVars.mainBackgroundColor]: '#000000',
-  [themeVars.mainTextColor]: '#ffffff',
-  [themeVars.mainButtonColor]: '#000000',
+  [themeVars.backgroundColor]: '#000000',
+  [themeVars.textColor]: '#ffffff',
+  [themeVars.buttonColor]: '#ffffff',
+  [themeVars.buttonTextColor]: '#000000',
+  [themeVars.borderColor]: '#ffffff',
 }
 
 const themes = {
@@ -33,12 +39,21 @@ const themes = {
 // ------------------------------------ //
 const GlobalStyle = createGlobalStyle`
   :root {
-    ${themeVars.mainBackgroundColor}: ${props =>
-  props.theme[themeVars.mainBackgroundColor]};
-    ${themeVars.mainTextColor}: ${props =>
-  props.theme[themeVars.mainTextColor]};
-    ${themeVars.mainButtonColor}: ${props =>
-  props.theme[themeVars.mainButtonColor]};
+    ${themeVars.backgroundColor}: ${props =>
+  /* $FlowFixMe */
+  props.theme[themeVars.backgroundColor]};
+    ${themeVars.textColor}: ${props =>
+  /* $FlowFixMe */
+  props.theme[themeVars.textColor]};
+    ${themeVars.buttonColor}: ${props =>
+  /* $FlowFixMe */
+  props.theme[themeVars.buttonColor]};
+    ${themeVars.buttonTextColor}: ${props =>
+  /* $FlowFixMe */
+  props.theme[themeVars.buttonTextColor]};
+    ${themeVars.borderColor}: ${props =>
+  /* $FlowFixMe */
+  props.theme[themeVars.borderColor]};
   }
   /* Include the normalize css */
   ${normalizeCss}
@@ -58,4 +73,4 @@ const GlobalStyle = createGlobalStyle`
 
 const { ThemeProvider, SwitchThemeContext } = initThemes(themes)
 
-export { ThemeProvider, SwitchThemeContext, GlobalStyle }
+export { ThemeProvider, SwitchThemeContext, GlobalStyle, themeVars }

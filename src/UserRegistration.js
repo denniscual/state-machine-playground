@@ -9,6 +9,7 @@ import React, {
 } from 'react'
 import styled from 'styled-components'
 import { State, useTransition } from './state-machine'
+import { themeVars } from './app-theme'
 import type { Node } from 'react'
 
 // ------------------------------------ //
@@ -18,6 +19,7 @@ const SC = {
   // Section
   section: styled.section`
     margin-bottom: 18em;
+    color: var(${themeVars.textColor});
     text-align: center;
   `,
   section__title: styled.h3`
@@ -26,20 +28,20 @@ const SC = {
   `,
   // Transition button
   transitionButton: styled.button`
-    background-color: #000;
+    background-color: var(${themeVars.buttonColor});
     padding: calc(0.5rem + 3px);
     margin: 0 0.5rem;
     text-transform: UPPERCASE;
     font-size: 0.8rem;
     font-weight: 700;
-    border: 3px solid #000000;
-    color: #fff;
+    border: 3px solid var(${themeVars.borderColor});
+    color: var(${themeVars.buttonTextColor});
     outline: 0;
 
     &:hover {
-      background-color: #ffffff;
-      border: 3px solid #000000;
-      color: #000000;
+      background-color: var(${themeVars.backgroundColor});
+      border: 3px solid var(${themeVars.textColor});
+      color: var(${themeVars.textColor});
     }
   `,
   // Input field
@@ -47,8 +49,10 @@ const SC = {
     width: 250px;
     margin-bottom: 1rem;
     padding: 0.5rem;
+    background-color: var(${themeVars.backgroundColor});
     border: 0;
-    border-bottom: 3px solid #000;
+    border-bottom: 3px solid var(${themeVars.borderColor});
+    color: var(${themeVars.textColor});
     text-align: center;
     outline: 0;
   `,

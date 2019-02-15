@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { Machine } from 'xstate'
 import StateMachineProvider from './state-machine'
 import UserRegistration from './UserRegistration'
-import { ThemeProvider, GlobalStyle } from './app-theme'
+import { ThemeProvider, GlobalStyle, themeVars } from './app-theme'
 
 // ------------------------------------ //
 // Styles
@@ -16,7 +16,8 @@ const SC = {
     justify-content: center;
     align-items: center;
     margin: 5px;
-    border: 3px solid #000;
+    background-color: var(${themeVars.backgroundColor});
+    border: 3px solid var(${themeVars.borderColor});
   `,
 }
 
@@ -74,7 +75,6 @@ function App() {
           <UserRegistration />
         </SC.appWrapper>
       </ThemeProvider>
-      >
     </StateMachineProvider>
   )
 }
