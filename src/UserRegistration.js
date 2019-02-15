@@ -34,7 +34,7 @@ const SC = {
     text-transform: UPPERCASE;
     font-size: 0.8rem;
     font-weight: 700;
-    border: 3px solid var(${themeVars.borderColor});
+    border: 3px solid var(${themeVars.buttonBorderColor});
     color: var(${themeVars.buttonTextColor});
     outline: 0;
 

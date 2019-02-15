@@ -27,11 +27,14 @@ function SwitchTheme() {
   return (
     <SC.switchWrapper>
       <SC.switchTitle>Try to switch theme</SC.switchTitle>
+      <SC.switchButton onClick={() => switchTheme('DARK')}>
+        Dark
+      </SC.switchButton>
       <SC.switchButton onClick={() => switchTheme('LIGHT')}>
         Light
       </SC.switchButton>
-      <SC.switchButton onClick={() => switchTheme('DARK')}>
-        Dark
+      <SC.switchButton onClick={() => switchTheme('INDIGO')}>
+        Indigo
       </SC.switchButton>
     </SC.switchWrapper>
   )

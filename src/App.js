@@ -75,7 +75,7 @@ const machine = Machine(statechart)
 function App() {
   return (
     <StateMachineProvider value={machine}>
-      <ThemeProvider value="LIGHT">
+      <ThemeProvider value="DARK">
         <GlobalStyle />
         <SC.appWrapper>
           <SwitchTheme />

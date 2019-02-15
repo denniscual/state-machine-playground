@@ -11,6 +11,7 @@ const themeVars = {
   textColor: '--text-color',
   buttonColor: '--button-color',
   buttonTextColor: '--button-text-color',
+  buttonBorderColor: '--button-border-color',
   borderColor: '--border-color',
 }
 
@@ -19,6 +20,7 @@ const lightTheme = {
   [themeVars.textColor]: '#000000',
   [themeVars.buttonColor]: '#000000',
   [themeVars.buttonTextColor]: '#ffffff',
+  [themeVars.buttonBorderColor]: '#000000',
   [themeVars.borderColor]: '#000000',
 }
 const darkTheme = {
@@ -26,12 +28,22 @@ const darkTheme = {
   [themeVars.textColor]: '#ffffff',
   [themeVars.buttonColor]: '#ffffff',
   [themeVars.buttonTextColor]: '#000000',
+  [themeVars.buttonBorderColor]: '#ffffff',
   [themeVars.borderColor]: '#ffffff',
+}
+const indigoTheme = {
+  [themeVars.backgroundColor]: '#303F9F',
+  [themeVars.textColor]: '#ffffff',
+  [themeVars.buttonColor]: '#ffffff',
+  [themeVars.buttonTextColor]: '#000000',
+  [themeVars.buttonBorderColor]: '#ffffff',
+  [themeVars.borderColor]: '#00BCD4',
 }
 
 const themes = {
   LIGHT: lightTheme,
   DARK: darkTheme,
+  INDIGO: indigoTheme,
 }
 
 // ------------------------------------ //
@@ -51,6 +63,9 @@ const GlobalStyle = createGlobalStyle`
     ${themeVars.buttonTextColor}: ${props =>
   /* $FlowFixMe */
   props.theme[themeVars.buttonTextColor]};
+    ${themeVars.buttonBorderColor}: ${props =>
+  /* $FlowFixMe */
+  props.theme[themeVars.buttonBorderColor]};
     ${themeVars.borderColor}: ${props =>
   /* $FlowFixMe */
   props.theme[themeVars.borderColor]};
