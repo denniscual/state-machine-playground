@@ -1,11 +1,10 @@
 // @flow
 import React from 'react'
-import styled, { createGlobalStyle } from 'styled-components'
+import styled from 'styled-components'
 import { Machine } from 'xstate'
 import StateMachineProvider from './state-machine'
 import UserRegistration from './UserRegistration'
-import { ThemeProvider } from './app-theme'
-import normalizeCss from './normalize'
+import { ThemeProvider, GlobalStyle } from './app-theme'
 
 // ------------------------------------ //
 // Styles
@@ -66,32 +65,12 @@ const statechart = {
 
 const machine = Machine(statechart)
 
-// ------------------------------------ //
-// Global styles
-// ------------------------------------ //
-const GlobalStyle = createGlobalStyle`
-  /* Include the normalize css */
-  ${normalizeCss}
-  * {
-    letter-spacing: 0.1em;
-  }
-  body {
-    height: 98vh;
-    width: 100vw;
-    font-family: sans-serif
-  }
-  /* Styling the root element */
-  #root {
-    height: 100%;
-  }
-`
-
 function App() {
   return (
     <StateMachineProvider value={machine}>
       <ThemeProvider value="LIGHT">
+        <GlobalStyle />
         <SC.appWrapper>
-          <GlobalStyle />
           <UserRegistration />
         </SC.appWrapper>
       </ThemeProvider>
