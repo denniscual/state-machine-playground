@@ -2,7 +2,7 @@
 import React, { createContext, useReducer } from 'react'
 import { ThemeProvider as RootThemeProvider } from 'styled-components'
 import debug from 'debug'
-import type { Node, Element } from 'react'
+import type { Node } from 'react'
 
 // Decorated debug tool
 const log = debug('themeReducer:dispatch')
@@ -32,13 +32,13 @@ function initThemes(themes: Object) {
   )
 
   function ThemeProvider({
-    initTheme,
+    value,
     children,
   }: {
-    initTheme: Object,
+    value: string,
     children: Node,
   }) {
-    const [theme, dispatch] = useReducer(themesReducer, initTheme)
+    const [theme, dispatch] = useReducer(themesReducer, themes[value])
     return (
       <RootThemeProvider theme={theme}>
         <SwitchThemeContext.Provider value={dispatch}>

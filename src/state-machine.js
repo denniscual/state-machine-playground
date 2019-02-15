@@ -9,7 +9,7 @@ import React, {
 import { interpret } from 'xstate/lib/interpreter'
 import { isNil } from 'ramda'
 import debug from 'debug'
-import type { Element, ChildrenArray } from 'react'
+import type { Node } from 'react'
 
 // Decorated debug tool
 const log = debug('stateMachine:transition')
@@ -58,7 +58,7 @@ function StateMachineProvider({
   children,
 }: {
   value: Machine,
-  children: Element<any>,
+  children: Node,
 }) {
   const [current, send] = useMachine(value)
   return (
@@ -70,6 +70,16 @@ function StateMachineProvider({
   )
 }
 
+// Returning the state machine current value (from xstate).
+function useStateMachine() {
+  return useContext(StateMachine)
+}
+
+// Returning the state machine transition.
+function useTransition() {
+  return useContext(StateMachineTransition)
+}
+
 // The component to define which parts of the tree should be rendered for a given state (or set of states).
 function State({
   is,
@@ -78,9 +88,9 @@ function State({
 }: {
   is: string, // TODO: is prop should accept string or array type. Check react-automata State component for ref - https://github.com/MicheleBertoli/react-automata.
   cond: boolean,
-  children: ChildrenArray<any>,
+  children: Node,
 }) {
-  const current = useContext(StateMachine)
+  const current = useStateMachine()
   if (current.matches(is)) {
     // Check if the cond is defined. Cond is an extended state logic.
     if (!isNil(cond)) {
@@ -95,16 +105,6 @@ function State({
 
 State.defaultProps = {
   cond: true,
-}
-
-// Returning the state machine current value (from xstate).
-function useStateMachine() {
-  return useContext(StateMachine)
-}
-
-// Returning the state machine transition.
-function useTransition() {
-  return useContext(StateMachineTransition)
 }
 
 export {
