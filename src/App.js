@@ -3,8 +3,14 @@ import React from 'react'
 import styled from 'styled-components'
 import { Machine } from 'xstate'
 import StateMachineProvider from './state-machine'
+import SwitchTheme from './SwitchTheme'
 import UserRegistration from './UserRegistration'
-import { ThemeProvider, GlobalStyle, themeVars } from './app-theme'
+import {
+  ThemeProvider,
+  useSwitchTheme,
+  GlobalStyle,
+  themeVars,
+} from './app-theme'
 
 // ------------------------------------ //
 // Styles
@@ -72,6 +78,7 @@ function App() {
       <ThemeProvider value="LIGHT">
         <GlobalStyle />
         <SC.appWrapper>
+          <SwitchTheme />
           <UserRegistration />
         </SC.appWrapper>
       </ThemeProvider>

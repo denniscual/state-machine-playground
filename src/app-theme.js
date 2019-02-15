@@ -71,6 +71,6 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
-const { ThemeProvider, SwitchThemeContext } = initThemes(themes)
+const { ThemeProvider, useSwitchTheme } = initThemes(themes)
 
-export { ThemeProvider, SwitchThemeContext, GlobalStyle, themeVars }
+export { ThemeProvider, useSwitchTheme, GlobalStyle, themeVars }
