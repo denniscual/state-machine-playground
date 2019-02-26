@@ -5,12 +5,7 @@ import { Machine } from 'xstate'
 import StateMachineProvider from './state-machine'
 import SwitchTheme from './SwitchTheme'
 import UserRegistration from './UserRegistration'
-import {
-  ThemeProvider,
-  useSwitchTheme,
-  GlobalStyle,
-  themeVars,
-} from './app-theme'
+import { ThemeProvider, GlobalStyle, themeVars } from './app-theme'
 
 // ------------------------------------ //
 // Styles

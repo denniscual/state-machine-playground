@@ -4,16 +4,16 @@ import styled from 'styled-components'
 import { useSwitchTheme, themeVars } from './app-theme'
 
 const SC = {
-  switchWrapper: styled.div`
+  switch: styled.div`
     position: fixed;
     bottom: 150px;
     text-align: center;
   `,
-  switchTitle: styled.h3`
+  switch__title: styled.h3`
     color: var(${themeVars.textColor});
     font-size: 0.9rem;
   `,
-  switchButton: styled.button`
+  switch__button: styled.button`
     background-color: var(${themeVars.backgroundColor});
     border: 0;
     color: var(${themeVars.textColor});
@@ -25,18 +25,18 @@ const SC = {
 function SwitchTheme() {
   const switchTheme = useSwitchTheme()
   return (
-    <SC.switchWrapper>
-      <SC.switchTitle>Try to switch theme</SC.switchTitle>
-      <SC.switchButton onClick={() => switchTheme('DARK')}>
+    <SC.switch>
+      <SC.switch__title>Try to switch theme</SC.switch__title>
+      <SC.switch__button onClick={() => switchTheme('DARK')}>
         Dark
-      </SC.switchButton>
-      <SC.switchButton onClick={() => switchTheme('LIGHT')}>
+      </SC.switch__button>
+      <SC.switch__button onClick={() => switchTheme('LIGHT')}>
         Light
-      </SC.switchButton>
-      <SC.switchButton onClick={() => switchTheme('INDIGO')}>
+      </SC.switch__button>
+      <SC.switch__button onClick={() => switchTheme('INDIGO')}>
         Indigo
-      </SC.switchButton>
-    </SC.switchWrapper>
+      </SC.switch__button>
+    </SC.switch>
   )
 }
 
